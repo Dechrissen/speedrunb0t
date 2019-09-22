@@ -869,7 +869,7 @@ def raceCommand(input):
             r = r + 1
             if diff == 0:
                 break
-        sendMessage(s, CHANNEL, "Race link: http://kadgar.net/live" + "/" + CHANNEL + "/".join(contenders))
+        sendMessage(s, CHANNEL, "Race link: http://kadgar.net/live/" + CHANNEL + "/" + "/".join(contenders))
         cooldown()
 
 
