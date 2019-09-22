@@ -145,7 +145,7 @@ def channels(input):
         for chan in channel_list:
             chan = chan.split(':')[0]
             channels.append(chan)
-        channels_message = "speedrunb0t is currently being used in the following channels:", channels
+        channels_message = "speedrunb0t is currently being used in the following channels:", str(channels)
         if len(channels_message) < 500:
             sendMessage(s, CHANNEL, channels_message)
         elif len(channels_message) < 1000:
