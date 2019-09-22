@@ -89,7 +89,7 @@ def joinChannel(input):
                 f.write(user + ":" + user + "\n")
             channel_list.append(user + ":" + user)
             s.send(("JOIN #" + user + "\r\n").encode())
-            sendMessage(s, user, "/me [Connected]")
+            sendMessage(s, user, "/me has joined.")
             sendMessage(s, CHANNEL, "@" + user.title() + " speedrunb0t has successfully joined your channel.")
             cooldown()
         else:
@@ -869,7 +869,7 @@ def raceCommand(input):
             r = r + 1
             if diff == 0:
                 break
-        sendMessage(s, CHANNEL, "Race link: http://kadgar.net/live/" + CHANNEL + "/".join(contenders))
+        sendMessage(s, CHANNEL, "Race link: http://kadgar.net/live" + "/" + CHANNEL + "/".join(contenders))
         cooldown()
 
 
@@ -912,10 +912,10 @@ def Console(line):
 def quitCommand(input):
     if input == message.strip().lower() and user == ADMIN:
         sendMessage(s, ADMIN, "/me [Disconnected]")
-        for chan in channel_list:
-            chan = chan.split(":")[0]
-            if chan != ADMIN:
-                sendMessage(s, chan, "/me [Disconnected]")
+        #for chan in channel_list:
+            #chan = chan.split(":")[0]
+            #if chan != ADMIN:
+                #sendMessage(s, chan, "/me [Disconnected]")
         quit()
     elif input == message.strip():
         sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !kill command.")
@@ -936,7 +936,7 @@ for chan in channel_list:
     chan = chan.split(":")[0]
     if chan != ADMIN:
         s.send(("JOIN #" + chan + "\r\n").encode())
-        sendMessage(s, chan, "/me [Connected]")
+        #sendMessage(s, chan, "/me [Connected]")
 
 while True:
 
