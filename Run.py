@@ -76,7 +76,7 @@ def isEmulator(title):
 
 
 def joinChannel(input):
-    if input == message.lower().strip():
+    if input == message.lower().strip() and CHANNEL == ADMIN:
         global channel_list
         is_joined = False
         for chan in channel_list:
@@ -95,6 +95,68 @@ def joinChannel(input):
         else:
             sendMessage(s, CHANNEL, "@" + user.title() + " speedrunb0t is already in your channel.")
             cooldown()
+
+def addChannel(input):
+    if input == message.lower().strip()[0] and user == ADMIN:
+        try:
+            newChannel = message.lower().split()[1]
+        except IndexError as err:
+            sendMessage(s, CHANNEL, "Error: Invalid syntax for the !addchannel command. Correct syntax is !addchannel <channel>")
+            return
+
+        try:
+            message.split()[2]
+        except IndexError as err:
+            pass
+        else:
+            sendMessage(s, CHANNEL, "Error: Invalid syntax for the !addchannel command. Correct syntax is !addchannel <channel>")
+            return
+        global channel_list
+        is_joined = False
+        for chan in channel_list:
+            chan = chan.split(':')[0]
+            if chan == newChannel:
+                is_joined = True
+                break
+        if is_joined == False:
+            with open('channels.txt', 'a') as f:
+                f.write(user + ":" + newChannel + "\n")
+            channel_list.append(newChannel + ":" + newChannel)
+            s.send(("JOIN #" + newChannel + "\r\n").encode())
+            sendMessage(s, newChannel, "/me has joined.")
+            sendMessage(s, CHANNEL, "speedrunb0t has successfully joined " + newChannel.title() + "'s channel.")
+            cooldown()
+            return
+        else:
+            sendMessage(s, CHANNEL, "speedrunb0t is already in " + newChannel.title() + "'s channel.")
+            cooldown()
+            return
+
+    elif input == message.lower().strip()[0] and user != ADMIN:
+        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !addchannel command.")
+        cooldown()
+        return
+
+
+def channels(input):
+    if input == message.lower().strip() and user == ADMIN:
+        global channel_list
+        channels = []
+        for chan in channel_list:
+            chan = chan.split(':')[0]
+            channels.append(chan)
+        channels_message = "speedrunb0t is currently being used in the following channels:", channels
+        if len(channels_message) < 500:
+            sendMessage(s, CHANNEL, channels_message)
+        elif len(channels_message) < 1000:
+            sendMessage(s, CHANNEL, channels_message[0:500])
+            sendMessage(s, CHANNEL, channels_message[500:])
+        else:
+            sendMessage(s, CHANNEL, "The list of channels is too long.")
+    elif input == message.lower().strip() and user != ADMIN:
+        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !channels command.")
+        cooldown()
+        return
 
 
 def setSRCName(input):
@@ -981,5 +1043,7 @@ while True:
         setSRCName('!setsrcname')
         docs('!help')
         joinChannel('$invite')
+        addChannel('!addchannel')
+        channels('!channels')
         quitCommand('!kill')
         continue
