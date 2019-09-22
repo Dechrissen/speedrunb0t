@@ -120,7 +120,7 @@ def addChannel(input):
                 break
         if is_joined == False:
             with open('channels.txt', 'a') as f:
-                f.write(user + ":" + newChannel + "\n")
+                f.write(newChannel + ":" + newChannel + "\n")
             channel_list.append(newChannel + ":" + newChannel)
             s.send(("JOIN #" + newChannel + "\r\n").encode())
             sendMessage(s, newChannel, "/me has joined.")
