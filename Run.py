@@ -97,7 +97,7 @@ def joinChannel(input):
             cooldown()
 
 def addChannel(input):
-    if input == message.lower().strip()[0] and user == ADMIN:
+    if input == message.lower().split()[0] and user == ADMIN:
         try:
             newChannel = message.lower().split()[1]
         except IndexError as err:
@@ -132,7 +132,7 @@ def addChannel(input):
             cooldown()
             return
 
-    elif input == message.lower().strip()[0] and user != ADMIN:
+    elif input == message.lower().split()[0] and user != ADMIN:
         sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !addchannel command.")
         cooldown()
         return
@@ -145,7 +145,7 @@ def channels(input):
         for chan in channel_list:
             chan = chan.split(':')[0]
             channels.append(chan)
-        channels_message = "speedrunb0t is currently being used in the following channels: " + str(channels)
+        channels_message = "speedrunb0t is currently being used in the following " + str(len(channels)) + " channels: " + str(channels)
         if len(channels_message) < 500:
             sendMessage(s, CHANNEL, channels_message)
         elif len(channels_message) < 1000:
