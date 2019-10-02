@@ -252,7 +252,12 @@ def worldRecord(input):
             return
 
         if category != None:
-            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                cooldown()
+                return
             readable = response.read().decode('utf-8')
             lst = loads(readable)
             runner = lst['data']['players']['data'][0]['names']['international']
@@ -338,7 +343,12 @@ def second(input):
             return
 
         if category != None:
-            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=2&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=2&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                cooldown()
+                return
             readable = response.read().decode('utf-8')
             lst = loads(readable)
             runner = lst['data']['players']['data'][1]['names']['international']
@@ -424,7 +434,12 @@ def third(input):
             return
 
         if category != None:
-            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=3&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=3&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                cooldown()
+                return
             readable = response.read().decode('utf-8')
             lst = loads(readable)
             runner = lst['data']['players']['data'][2]['names']['international']
@@ -510,7 +525,12 @@ def fourth(input):
             return
 
         if category != None:
-            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=4&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=4&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                cooldown()
+                return
             readable = response.read().decode('utf-8')
             lst = loads(readable)
             runner = lst['data']['players']['data'][3]['names']['international']
