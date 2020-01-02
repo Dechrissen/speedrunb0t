@@ -273,7 +273,7 @@ def worldRecord(input):
             else:
                 wr = str(seconds) + "s "
 
-            sendMessage(s, CHANNEL, "The " + category_title + " (" + platform_title + ")" + " world record is " + wr + "by " + runner + ".")
+            sendMessage(s, CHANNEL, "The " + category_title + " world record is " + wr + "by " + runner + ".")
             cooldown()
             return
 
@@ -364,7 +364,7 @@ def second(input):
             else:
                 place2nd = str(seconds) + "s "
 
-            sendMessage(s, CHANNEL, "The 2nd place time for " + category_title + " (" + platform_title + ")" + " is " + place2nd + "by " + runner + ".")
+            sendMessage(s, CHANNEL, "The 2nd place time for " + category_title + " is " + place2nd + "by " + runner + ".")
             cooldown()
             return
 
@@ -455,7 +455,7 @@ def third(input):
             else:
                 place3rd = str(seconds) + "s "
 
-            sendMessage(s, CHANNEL, "The 3rd place time for " + category_title + " (" + platform_title + ")" + " is " + place3rd + "by " + runner + ".")
+            sendMessage(s, CHANNEL, "The 3rd place time for " + category_title + " is " + place3rd + "by " + runner + ".")
             cooldown()
             return
 
@@ -546,7 +546,98 @@ def fourth(input):
             else:
                 place4th = str(seconds) + "s "
 
-            sendMessage(s, CHANNEL, "The 4th place time for " + category_title + " (" + platform_title + ")" + " is " + place4th + "by " + runner + ".")
+            sendMessage(s, CHANNEL, "The 4th place time for " + category_title + " is " + place4th + "by " + runner + ".")
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+
+def fifth(input):
+    if input == message.lower().split()[0].strip():
+        #Check to see if an argument is specified first
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
+        #get user ID of current channel
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #get title of current channel
+        title = getStreamTitle(USER_ID)
+        if isEmulator(title):
+            emulators = 'true'
+        else:
+            emulators = 'false'
+        game, platform, platform_title = getGame(USER_ID)
+        if '[' in title and ']' in title:
+            for i in range(len(PLATFORMS)):
+                if PLATFORMS[i][0].lower() == title.split('[')[1].split(']')[0]:
+                    platform = PLATFORMS[i][1]
+                    platform_title = PLATFORMS[i][0]
+                    break
+        category = None
+        category_title = None
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(input, 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, CHANNEL, "Error: Invalid category specified")
+                cooldown()
+                return
+
+        if game == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+        if category != None:
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=5&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                cooldown()
+                return
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+            runner = lst['data']['players']['data'][4]['names']['international']
+            time_in_sec = int(lst['data']['runs'][4]['run']['times']['realtime_t'])
+            hours = divmod(time_in_sec, 3600)
+            minutes = divmod(hours[1], 60)
+            seconds = minutes[1]
+            place5th = ''
+            if hours[0] > 0:
+                place5th = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+            elif minutes[0] > 0:
+                place5th = str(minutes[0]) + "m " + str(seconds) + "s "
+            else:
+                place5th = str(seconds) + "s "
+
+            sendMessage(s, CHANNEL, "The 5th place time for " + category_title + " is " + place5th + "by " + runner + ".")
             cooldown()
             return
 
@@ -647,7 +738,7 @@ def personalBest(input):
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " (" + platform_title + ") on the leaderboard.")
+                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
@@ -664,7 +755,7 @@ def personalBest(input):
             else:
                 pb = str(seconds) + "s"
 
-            sendMessage(s, CHANNEL, username.title() + "\'s " + category_title + " (" + platform_title + ") PB is " + pb + " (" + ordinal(place) + " place).")
+            sendMessage(s, CHANNEL, username.title() + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
             cooldown()
 
         elif category_title == None:
@@ -860,13 +951,13 @@ def place(input):
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " (" + platform_title + ") on the leaderboard.")
+                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
             ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
 
-            sendMessage(s, CHANNEL, username.title() + " is in " + ordinal(place) + " place for " + category_title + " (" + platform_title + ").")
+            sendMessage(s, CHANNEL, username.title() + " is in " + ordinal(place) + " place for " + category_title + ".")
 
         elif category_title == None:
             sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
@@ -918,6 +1009,75 @@ def leaderboard(input):
             cooldown()
             return
 
+def listRules(input):
+    if input == message.lower().strip():
+        #get user ID of current channel
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #get title of current channel
+        title = getStreamTitle(USER_ID)
+        game, platform, platform_title = getGame(USER_ID)
+        game_title = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][1] == game:
+                game_title = GAMES[i][0]
+                break
+
+        category = None
+        category_title = None
+        for i in range(len(CATEGORIES)):
+            if CATEGORIES[i][0].lower() in title:
+                category = CATEGORIES[i][1]
+                category_title = CATEGORIES[i][0]
+                break
+
+        if game == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+        if category != None:
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/games/{}/categories'.format(game))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "HTTP Error")
+                cooldown()
+                return
+
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+
+            rules = ' '
+
+            for cat in lst['data']:
+                if cat['name'].lower() == category_title.lower():
+                    rules = cat['rules'].split('\r\n')
+                    for rule in rules:
+                        rule = rule.strip('-')
+                    list_of_rules = ' '.join(rules)
+
+            sendMessage(s, CHANNEL, game_title + " " + category_title + " rules: " + list_of_rules)
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+
+def listGames(input):
+    if input == message.lower().strip():
+        sendMessage(s, CHANNEL, "Games currently supported: " + ", ".join([game[0] for game in GAMES]))
+        cooldown()
+        return
+
 
 #Returns a kadgar.net link with the channel owner and the other racers if a race is happening
 def raceCommand(input):
@@ -959,7 +1119,7 @@ def raceCommand(input):
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, CHANNEL, 'Commands: !wr • !2nd • !3rd • !4th • !pb • !runs • !place • !leaderboard • !race • !help')
+        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !runs • !place • !leaderboard • !rules • !race • !games • !help')
         cooldown()
 
 #Documentation
@@ -993,14 +1153,14 @@ def Console(line):
 #Quits the bot program (admin only)
 def quitCommand(input):
     if input == message.strip().lower() and user == ADMIN:
-        sendMessage(s, ADMIN, "/me [Disconnected]")
+        sendMessage(s, ADMIN, "/me has disconnected.")
         #for chan in channel_list:
             #chan = chan.split(":")[0]
             #if chan != ADMIN:
                 #sendMessage(s, chan, "/me [Disconnected]")
         quit()
     elif input == message.strip():
-        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !kill command.")
+        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Administrator may use the !kill command.")
         cooldown()
 
 
@@ -1055,10 +1215,13 @@ while True:
         second('!2nd')
         third('!3rd')
         fourth('!4th')
+        fifth('!5th')
         personalBest('!pb')
         runs('!runs')
         place('!place')
         leaderboard('!leaderboard')
+        listRules('!rules')
+        listGames('!games')
         raceCommand('!race')
         setSRCName('!setsrcname')
         docs('!help')

@@ -15,7 +15,7 @@ def joinRoom(s):
         for line in temp:
             print(line)
             Loading = loadingComplete(line)
-    sendMessage(s, ADMIN, "/me [Connected to administrator]")
+    sendMessage(s, ADMIN, "/me has reconnected.")
 
 def loadingComplete(line):
     if("End of /NAMES list" in line):
