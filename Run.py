@@ -8,7 +8,8 @@ from json import loads
 from Socket import openSocket, sendMessage
 from Initialize import joinRoom
 from Read import getUser, getMessage, getChannel
-from Settings import COOLDOWN, IDENT, ADMIN, CLIENT_ID, GAMES, CATEGORIES, PLATFORMS
+from Settings import COOLDOWN, IDENT, ADMIN, CLIENT_ID
+from Games import GAMES, CATEGORIES, PLATFORMS
 
 
 def getUserID(username):
