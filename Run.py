@@ -764,6 +764,109 @@ def personalBest(input):
             cooldown()
             return
 
+def lastPB(input):
+    if input == message.lower().split()[0]:
+        SRC_USERNAME = ''
+        for i in channel_list:
+            if CHANNEL in i:
+                SRC_USERNAME = i.split(":")[1].strip('\n')
+                break
+            else:
+                SRC_USERNAME = ADMIN
+
+        category_specified = False
+        try:
+            message.split()[2]
+        except IndexError as err:
+            pass
+        else:
+            category_specified = True
+
+        #get user ID of current channel
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #get title of current channel
+        title = getStreamTitle(USER_ID)
+        game, platform, platform_title = getGame(USER_ID)
+        if '[' in title and ']' in title:
+            for i in range(len(PLATFORMS)):
+                if PLATFORMS[i][0].lower() == title.split('[')[1].split(']')[0]:
+                    platform_title = PLATFORMS[i][0]
+                    break
+
+        category_title = None
+        if category_specified == True:
+            category_title = message.lower().strip('!lastpb ')
+            first_word = category_title.lower().split()[0]
+            category_title = category_title.split(first_word, 1)[-1].strip()
+            check = False
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() == category_title:
+                    check = True
+                    category_title = CATEGORIES[i][0]
+                    break
+            if check == False:
+                sendMessage(s, CHANNEL, "Error: Invalid category specified")
+                cooldown()
+                return
+
+        elif category_specified == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category_title = CATEGORIES[i][0]
+                    break
+
+        if game == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+        username = None
+        try:
+            message.split()[1]
+        except IndexError as err:
+            username = SRC_USERNAME
+        else:
+            username = message.split()[1]
+
+
+        if category_title != None:
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(username))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "Error: Speedrun.com user not found")
+                cooldown()
+                return
+
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+
+            place = None
+            time_in_sec = None
+            for cat in lst['data']:
+                if cat['category']['data']['name'].lower() == category_title.lower() and cat['game']['data']['abbreviation'].lower() == game and cat['platform']['data']['name'].lower() == platform_title.lower():
+                    place = cat['place']
+                    date = cat['run']['date']
+                    break
+
+            if place == None:
+                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
+                cooldown()
+                return
+
+            sendMessage(s, CHANNEL, username.title() + " last PBed in " + category_title + " on " + date + ".")
+            cooldown()
+
+        elif category_title == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
 def runs(input):
     if input == message.lower().split()[0]:
         SRC_USERNAME = ''
@@ -1120,7 +1223,7 @@ def raceCommand(input):
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !runs • !place • !leaderboard • !rules • !race • !games • !help')
+        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !help')
         cooldown()
 
 #Documentation
@@ -1218,6 +1321,7 @@ while True:
         fourth('!4th')
         fifth('!5th')
         personalBest('!pb')
+        lastPB('!lastpb')
         runs('!runs')
         place('!place')
         leaderboard('!leaderboard')
