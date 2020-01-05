@@ -155,7 +155,7 @@ def channels(input):
         else:
             sendMessage(s, CHANNEL, "The list of channels is too long.")
     elif input == message.lower().strip() and user != ADMIN:
-        sendMessage(s, CHANNEL, "@" + user + " Only the Bot Administrator may use the !channels command.")
+        sendMessage(s, CHANNEL, "@" + user + " Only the Administrator may use the !channels command.")
         cooldown()
         return
 
