@@ -91,10 +91,10 @@ def joinChannel(input):
             channel_list.append(user + ":" + user)
             s.send(("JOIN #" + user + "\r\n").encode())
             sendMessage(s, user, "/me has joined.")
-            sendMessage(s, CHANNEL, "@" + user.title() + " speedrunb0t has successfully joined your channel.")
+            sendMessage(s, CHANNEL, "@" + user + " speedrunb0t has successfully joined your channel.")
             cooldown()
         else:
-            sendMessage(s, CHANNEL, "@" + user.title() + " speedrunb0t is already in your channel.")
+            sendMessage(s, CHANNEL, "@" + user + " speedrunb0t is already in your channel.")
             cooldown()
 
 def addChannel(input):
@@ -125,16 +125,16 @@ def addChannel(input):
             channel_list.append(newChannel + ":" + newChannel)
             s.send(("JOIN #" + newChannel + "\r\n").encode())
             sendMessage(s, newChannel, "/me has joined.")
-            sendMessage(s, CHANNEL, "speedrunb0t has successfully joined " + newChannel.title() + "'s channel.")
+            sendMessage(s, CHANNEL, "speedrunb0t has successfully joined " + newChannel + "'s channel.")
             cooldown()
             return
         else:
-            sendMessage(s, CHANNEL, "speedrunb0t is already in " + newChannel.title() + "'s channel.")
+            sendMessage(s, CHANNEL, "speedrunb0t is already in " + newChannel + "'s channel.")
             cooldown()
             return
 
     elif input == message.lower().split()[0] and user != ADMIN:
-        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !addchannel command.")
+        sendMessage(s, CHANNEL, "@" + user + " Only the Administrator may use the !addchannel command.")
         cooldown()
         return
 
@@ -155,7 +155,7 @@ def channels(input):
         else:
             sendMessage(s, CHANNEL, "The list of channels is too long.")
     elif input == message.lower().strip() and user != ADMIN:
-        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Bot Administrator may use the !channels command.")
+        sendMessage(s, CHANNEL, "@" + user + " Only the Bot Administrator may use the !channels command.")
         cooldown()
         return
 
@@ -187,7 +187,7 @@ def setSRCName(input):
             cooldown()
 
         elif user != CHANNEL:
-            sendMessage(s, CHANNEL, "@" + user.title() + " Only the channel owner may use this command.")
+            sendMessage(s, CHANNEL, "@" + user + " Only the channel owner may use this command.")
             cooldown()
 
 
@@ -739,7 +739,7 @@ def personalBest(input):
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
+                sendMessage(s, CHANNEL, username + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
@@ -756,7 +756,7 @@ def personalBest(input):
             else:
                 pb = str(seconds) + "s"
 
-            sendMessage(s, CHANNEL, username.title() + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
+            sendMessage(s, CHANNEL, username + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
             cooldown()
 
         elif category_title == None:
@@ -855,11 +855,11 @@ def lastPB(input):
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
+                sendMessage(s, CHANNEL, username + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
-            sendMessage(s, CHANNEL, username.title() + " last PBed in " + category_title + " on " + date + ".")
+            sendMessage(s, CHANNEL, username + " last PBed in " + category_title + " on " + date + ".")
             cooldown()
 
         elif category_title == None:
@@ -926,7 +926,7 @@ def runs(input):
         if lst['data'] != []:
             pass
         else:
-            sendMessage(s, CHANNEL, username.title() + " has no submitted runs for the current game.")
+            sendMessage(s, CHANNEL, username + " has no submitted runs for the current game.")
             cooldown()
             return
         for run in lst['data']:
@@ -948,7 +948,7 @@ def runs(input):
             list_of_runs.append(category_title + " in " + pb + " (" + ordinal(place) + ")")
 
         game_title = lst['data'][0]['game']['data']['names']['international']
-        run_message = username.title() + "\'s " + game_title + " PBs: " + ", ".join(list_of_runs) + "."
+        run_message = username + "\'s " + game_title + " PBs: " + ", ".join(list_of_runs) + "."
         if len(run_message) < 500:
             sendMessage(s, CHANNEL, run_message)
         elif len(run_message) < 1000:
@@ -1055,13 +1055,13 @@ def place(input):
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
+                sendMessage(s, CHANNEL, username + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
             ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
 
-            sendMessage(s, CHANNEL, username.title() + " is in " + ordinal(place) + " place for " + category_title + ".")
+            sendMessage(s, CHANNEL, username + " is in " + ordinal(place) + " place for " + category_title + ".")
 
         elif category_title == None:
             sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
@@ -1200,7 +1200,7 @@ def raceCommand(input):
         if 'race with' in title:
             pass
         elif 'race with' not in title:
-            sendMessage(s, CHANNEL, CHANNEL.title() + " is not currently racing or no racers found in stream title.")
+            sendMessage(s, CHANNEL, CHANNEL + " is not currently racing or no racers found in stream title.")
             cooldown()
             return
 
@@ -1229,7 +1229,7 @@ def getCommands(input):
 #Documentation
 def docs(input):
     if input == message.lower().strip():
-        sendMessage(s, CHANNEL, "speedrunb0t's documentation can be found here: https://dechrissen.github.io/speedrunb0t/#bot-commands")
+        sendMessage(s, CHANNEL, "speedrunb0t's documentation can be found here: https://dechrissen.github.io/speedrunb0t")
         cooldown()
 
 
@@ -1264,7 +1264,7 @@ def quitCommand(input):
                 #sendMessage(s, chan, "/me [Disconnected]")
         quit()
     elif input == message.strip():
-        sendMessage(s, CHANNEL, "@" + user.title() + " Only the Administrator may use the !kill command.")
+        sendMessage(s, CHANNEL, "@" + user + " Only the Administrator may use the !kill command.")
         cooldown()
 
 
