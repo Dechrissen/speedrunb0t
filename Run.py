@@ -268,11 +268,11 @@ def worldRecord(input):
             seconds = minutes[1]
             wr = ''
             if hours[0] > 0:
-                wr = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+                wr = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
             elif minutes[0] > 0:
-                wr = str(minutes[0]) + "m " + str(seconds) + "s "
+                wr = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
             else:
-                wr = str(seconds) + "s "
+                wr = str(seconds) + " sec "
 
             sendMessage(s, CHANNEL, "The " + category_title + " world record is " + wr + "by " + runner + ".")
             cooldown()
@@ -359,11 +359,11 @@ def second(input):
             seconds = minutes[1]
             place2nd = ''
             if hours[0] > 0:
-                place2nd = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+                place2nd = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
             elif minutes[0] > 0:
-                place2nd = str(minutes[0]) + "m " + str(seconds) + "s "
+                place2nd = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
             else:
-                place2nd = str(seconds) + "s "
+                place2nd = str(seconds) + " sec "
 
             sendMessage(s, CHANNEL, "The 2nd place time for " + category_title + " is " + place2nd + "by " + runner + ".")
             cooldown()
@@ -450,11 +450,11 @@ def third(input):
             seconds = minutes[1]
             place3rd = ''
             if hours[0] > 0:
-                place3rd = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+                place3rd = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
             elif minutes[0] > 0:
-                place3rd = str(minutes[0]) + "m " + str(seconds) + "s "
+                place3rd = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
             else:
-                place3rd = str(seconds) + "s "
+                place3rd = str(seconds) + " sec "
 
             sendMessage(s, CHANNEL, "The 3rd place time for " + category_title + " is " + place3rd + "by " + runner + ".")
             cooldown()
@@ -541,11 +541,11 @@ def fourth(input):
             seconds = minutes[1]
             place4th = ''
             if hours[0] > 0:
-                place4th = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+                place4th = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
             elif minutes[0] > 0:
-                place4th = str(minutes[0]) + "m " + str(seconds) + "s "
+                place4th = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
             else:
-                place4th = str(seconds) + "s "
+                place4th = str(seconds) + " sec "
 
             sendMessage(s, CHANNEL, "The 4th place time for " + category_title + " is " + place4th + "by " + runner + ".")
             cooldown()
@@ -632,11 +632,11 @@ def fifth(input):
             seconds = minutes[1]
             place5th = ''
             if hours[0] > 0:
-                place5th = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+                place5th = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
             elif minutes[0] > 0:
-                place5th = str(minutes[0]) + "m " + str(seconds) + "s "
+                place5th = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
             else:
-                place5th = str(seconds) + "s "
+                place5th = str(seconds) + " sec "
 
             sendMessage(s, CHANNEL, "The 5th place time for " + category_title + " is " + place5th + "by " + runner + ".")
             cooldown()
@@ -750,11 +750,11 @@ def personalBest(input):
             seconds = minutes[1]
             pb = ''
             if hours[0] > 0:
-                pb = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s"
+                pb = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
             elif minutes[0] > 0:
-                pb = str(minutes[0]) + "m " + str(seconds) + "s"
+                pb = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
             else:
-                pb = str(seconds) + "s"
+                pb = str(seconds) + " sec "
 
             sendMessage(s, CHANNEL, username + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
             cooldown()
@@ -939,11 +939,11 @@ def runs(input):
             seconds = minutes[1]
             pb = ''
             if hours[0] > 0:
-                pb = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s"
+                pb = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2)
             elif minutes[0] > 0:
-                pb = str(minutes[0]) + "m " + str(seconds) + "s"
+                pb = str(minutes[0]) + ":" + str(seconds).zfill(2)
             else:
-                pb = str(seconds) + "s"
+                pb = str(seconds) + " sec"
             #add run to the list to be printed
             list_of_runs.append(category_title + " in " + pb + " (" + ordinal(place) + ")")
 
@@ -958,7 +958,7 @@ def runs(input):
             sendMessage(s, CHANNEL, run_message2)
             cooldown()
         else:
-            sendMessage(s, CHANNEL, "This user's list of PBs is too long. Go look it up.")
+            sendMessage(s, CHANNEL, "This user's list of PBs is too long.")
             cooldown()
 
 
