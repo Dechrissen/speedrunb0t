@@ -2,68 +2,77 @@
 An always-online bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration.
 
 ## Games Currently Supported
-*If you'd like me to add support for another game, just message me on Discord [Dechrissen#7708] :-)*
+*If you'd like me to add support for another game, just message me on Discord [Dechrissen#7708]*
 - Banjo-Kazooie
 - Banjo-Tooie
 - Donkey Kong 64
 - Super Mario 64
 - Diddy Kong Racing
+- Donkey Kong Country
+- Donkey Kong Country 2: Diddy's Kong Quest
+- Donkey Kong Country 3: Dixie Kong's Double Trouble!
 
 ## Index
-1. [What Can speedrunb0t Do?](#what-can-speedrunb0t-do)
-2. [Bot Commands](#bot-commands)
-3. [How to Invite speedrunb0t to Your Channel](#how-to-invite-speedrunb0t-to-your-channel)
-4. [Guidelines for Use](#guidelines-for-use)
+1. [What can speedrunb0t do?](#what-can-speedrunb0t-do)
+2. [Bot commands](#bot-commands)
+3. [How to invite speedrunb0t to your channel](#how-to-invite-speedrunb0t-to-your-channel)
+4. [Guidelines for use](#guidelines-for-use)
 
-## What Can speedrunb0t Do?
-- Tell a user the world record for the current game & category, or a specified category
-- Tell a user the second, third, or fourth place time for the current game & category, or a specified category
-- Tell a user your personal best time for the current game & category
-- Tell a user the personal best time of a specified Speedrun.com user for the current game & category, or a specified category
-- Tell a user the leaderboard standing of the channel owner for the current game & category
-- Tell a user the leaderboard standing of a specified user for the current game & category, or a specified category
-- List all of your PBs for the current game, or the PBs of a specified user
+## What can speedrunb0t do?
+- Retrieve the world record for the current game & category
+- Retrieve your personal best time for the current game & category
+- Retrieve the personal best time of a Speedrun.com user for the current game & category
+- Retrieve the leaderboard standing of a user for the current game & category
+- Retrieve a list of a user's PBs for the current game
 - Generate a Speedrun.com link to the leaderboard for the current category
 - Generate a kadgar.net race link with you and other speedrunners' Twitch channels 
 
-## Bot Commands
-*Square brackets around variables indicate optionality. Angled brackets indicate required variables.*
+## Bot commands
+*Square brackets around variables indicate optionality. Angled brackets indicate required variables.*  
+*For commands with an optional [user] variable, the user defaults to the channel owner.*
 - `!wr [category]` (everyone)
-    - Returns the world record (time and runner) for the current game & category (or, the specified category).
+    - Returns the world record (time and runner) for the current game & category.
 - `!2nd [category]` (everyone)
-    - Returns the 2nd place time and runner for the current game & category (or, the specified category).
+    - Returns the 2nd place time and runner for the current game & category.
 - `!3rd [category]` (everyone)
-    - Returns the third place time and runner for the current game & category (or, the specified category).
+    - Returns the third place time and runner for the current game & category.
 - `!4th [category]` (everyone)
-    - Returns the fourth place time and runner for the current game & category (or, the specified category).
+    - Returns the fourth place time and runner for the current game & category.
+- `!5th [category]` (everyone)
+    - Returns the fifth place time and runner for the current game & category.
 - `!pb [user] [category]` (everyone)
-    - Returns your personal best (or, the personal best of a specified user) for the current game & category (or, the specified category).
+    - Returns the personal best of a user for the current game & category.
+- `!lastpb [user] [category]` (everyone)
+    - Returns the date that a user last PBed in the current category.
 - `!place [user] [category]` (everyone)
-    - Returns the leaderboard standing of the channel owner for the current category, or the leaderboard standing of the specified user. A different category can also be specified as a third argument.
+    - Returns the leaderboard standing of a user for the current category.
 - `!runs [user]` (everyone)
-    - Returns a list of your PBs for the current game (or, the PBs of a specified user).
+    - Returns a list of a user's PBs for the current game (all categories).
 - `!leaderboard` (everyone)
-    - Generates a [Speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category specified in your stream title.
+    - Generates a [Speedrun.com](https://www.speedrun.com/) link to the leaderboard for the current game & category.
+- `!rules` (everyone)
+    - Displays the rules for the current category (taken from Speedrun.com).
 - `!race` (everyone)
     - Generates a [Kadgar.net](http://kadgar.net) link with you and your opponents' streams (if you are currently racing).
+- `!games` (everyone)
+    - Returns a list of speedrunb0t's currently supported games.
+- `!help` (everyone)
+    - Provides a link to speedrunb0t's GitHub site/documentation.
 - `!commands` (everyone)
     - Returns a list of speedrunb0t's commands.
 - `!setsrcname <src_username>` (channel owner only)
     - Changes the Speedrun.com username associated with the channel. The associated username defaults to your Twitch username.
-- `!help` (everyone)
-    - Provides a link to speedrunb0t's GitHub site/documentation.
 
-## How to Invite speedrunb0t to Your Channel
-In order to have speedrunb0t join your channel, go to my Twitch channel [here](https://www.twitch.tv/dechrissen) and type `$invite` in the chat. The bot will automatically join your channel, and you won't have to do anything else.
+## How to invite speedrunb0t to your channel
+In order to have speedrunb0t join your channel, go to my Twitch channel [here](https://www.twitch.tv/dechrissen) and type `$invite` in the chat. The bot will automatically join your channel. If your Speedrun.com username is *different* from your Twitch username, please use the `!setsrcname` command in your chat to change the associated username to your Speedrun.com username.
 
-## Guidelines for Use
+## Guidelines for use
 *Follow these guidelines for speedrunb0t to function properly in your channel.*
-- It is recommended that you Mod (or VIP) speedrunb0t in your channel so that it can send the same message multiple times in a row if necessary, and it doesn't accidentally get banned/timed out.
-- If your Twitch username is different from your Speedrun.com username, use `!setsrcname <src_username>` to update it in speedrunb0t's registry.
-- Make sure the game you're running is set via Twitch's 'game' feature in your Live Dashboard.
+- It is recommended that you make speedrunb0t a Moderator in your channel so that it doesn't get accidentally timed out/banned.
+- Make sure the game you're running is set via Twitch's 'Game' feature in your Live Dashboard.
 - Make sure the name of the category you're running is in your stream title exactly as it's listed on Speedrun.com.
-- [Optional] If the platform on which you're playing the game is *different* from the default platform on the Speedrun.com leaderboard, you must put "[*platform name*]" in your title where *platform name* is the name of the platform you're using.
+- If the platform on which you're playing the game is *different* from the default platform on the Speedrun.com leaderboard, you must put "[*platform name*]" in your title where *platform name* is the name of the platform you're using.
     - *e.g.* If Nintendo 64 is the default platform and you run on Xbox 360, add "[Xbox 360]" somewhere in your stream title
-- [Optional] If you're running on emulator, make sure "emulator" is somewhere in your stream title.
+- If you're running on emulator, make sure "emulator" is somewhere in your stream title.
 - For the `!race` command to work properly, make sure "race with" is somewhere in your stream title, directly followed by the Twitch usernames of your opponents, separated by commas.
     - *e.g.* "Banjo-Tooie Any% race with streamerdude11, twitchboy101, awesomeguy55"
