@@ -15,7 +15,7 @@ from Games import GAMES, CATEGORIES, PLATFORMS
 def getUserID(username):
     try:
         url = "https://api.twitch.tv/kraken/users?login={}".format(username)
-        hdr = {'Client-ID': 'eoe4ex6phzs05gspwg8kgms3joi7cm', 'Accept': 'application/vnd.twitchtv.v5+json'}
+        hdr = {'Client-ID': CLIENT_ID, 'Accept': 'application/vnd.twitchtv.v5+json'}
         req = urllib.request.Request(url, headers=hdr)
         response = urllib.request.urlopen(req)
     except urllib.error.HTTPError as err:
@@ -30,7 +30,7 @@ def getUserID(username):
 def getStreamTitle(USER_ID):
     try:
         url = "https://api.twitch.tv/kraken/channels/{}".format(USER_ID)
-        hdr = {'Client-ID': 'eoe4ex6phzs05gspwg8kgms3joi7cm', 'Accept': 'application/vnd.twitchtv.v5+json'}
+        hdr = {'Client-ID': CLIENT_ID, 'Accept': 'application/vnd.twitchtv.v5+json'}
         req = urllib.request.Request(url, headers=hdr)
         response = urllib.request.urlopen(req)
     except urllib.error.HTTPError as err:
@@ -45,7 +45,7 @@ def getStreamTitle(USER_ID):
 def getGame(USER_ID):
     try:
         url = "https://api.twitch.tv/kraken/channels/{}".format(USER_ID)
-        hdr = {'Client-ID': 'eoe4ex6phzs05gspwg8kgms3joi7cm', 'Accept': 'application/vnd.twitchtv.v5+json'}
+        hdr = {'Client-ID': CLIENT_ID, 'Accept': 'application/vnd.twitchtv.v5+json'}
         req = urllib.request.Request(url, headers=hdr)
         response = urllib.request.urlopen(req)
     except urllib.error.HTTPError as err:
