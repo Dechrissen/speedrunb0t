@@ -32,35 +32,35 @@ An always-online bot for Twitch.tv with speedrunner-specific functionality and S
 ## Bot commands
 *Square brackets around variables indicate optionality. Angled brackets indicate required variables.*  
 *For commands with an optional [user] variable, the user defaults to the channel owner.*
-- `!wr [category]` (everyone)
+- `!wr [category]`
     - Returns the world record (time and runner) for the current game & category.
-- `!2nd [category]` (everyone)
+- `!2nd [category]`
     - Returns the 2nd place time and runner for the current game & category.
-- `!3rd [category]` (everyone)
+- `!3rd [category]`
     - Returns the third place time and runner for the current game & category.
-- `!4th [category]` (everyone)
+- `!4th [category]`
     - Returns the fourth place time and runner for the current game & category.
-- `!5th [category]` (everyone)
+- `!5th [category]`
     - Returns the fifth place time and runner for the current game & category.
-- `!pb [user] [category]` (everyone)
+- `!pb [user] [category]`
     - Returns the personal best of a user for the current game & category.
-- `!lastpb [user] [category]` (everyone)
+- `!lastpb [user] [category]`
     - Returns the date that a user last PBed in the current category.
-- `!place [user] [category]` (everyone)
+- `!place [user] [category]`
     - Returns the leaderboard standing of a user for the current category.
-- `!runs [user]` (everyone)
+- `!runs [user]`
     - Returns a list of a user's PBs for the current game (all categories).
-- `!leaderboard` (everyone)
+- `!leaderboard`
     - Generates a [Speedrun.com](https://www.speedrun.com/) link to the leaderboard for the current game & category.
-- `!rules` (everyone)
+- `!rules`
     - Displays the rules for the current category (taken from Speedrun.com).
-- `!race` (everyone)
+- `!race`
     - Generates a [Kadgar.net](http://kadgar.net) link with you and your opponents' streams (if you are currently racing).
-- `!games` (everyone)
+- `!games`
     - Returns a list of speedrunb0t's currently supported games.
-- `!help` (everyone)
+- `!help`
     - Provides a link to speedrunb0t's GitHub site/documentation.
-- `!commands` (everyone)
+- `!commands`
     - Returns a list of speedrunb0t's commands.
 - `!setsrcname <src_username>` (channel owner only)
     - Changes the Speedrun.com username associated with the channel. The associated username defaults to your Twitch username.
