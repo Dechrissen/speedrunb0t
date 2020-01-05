@@ -187,7 +187,7 @@ def setSRCName(input):
             cooldown()
 
         elif user != CHANNEL:
-            sendMessage(s, CHANNEL, "@" + user + " Only the channel owner may use this command.")
+            sendMessage(s, CHANNEL, "@" + user + " Only the channel owner may use the !setsrcname command.")
             cooldown()
 
 
@@ -256,7 +256,7 @@ def worldRecord(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -347,7 +347,7 @@ def second(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=2&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -438,7 +438,7 @@ def third(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=3&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -529,7 +529,7 @@ def fourth(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=4&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -620,7 +620,7 @@ def fifth(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=5&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "HTTPError: Please try again")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -1157,6 +1157,7 @@ def listRules(input):
             readable = response.read().decode('utf-8')
             lst = loads(readable)
 
+            list_of_rules = "Not found"
             rules = ' '
 
             for cat in lst['data']:
