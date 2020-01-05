@@ -1,8 +1,15 @@
 # speedrunb0t
 An always-online bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration.
 
-## Games Currently Supported
-*If you'd like me to add support for another game, just message me on Discord [Dechrissen#7708]*
+## Index
+1. [Currently supported games](#currently-supported-games)
+2. [What can speedrunb0t do?](#what-can-speedrunb0t-do)
+3. [Bot commands](#bot-commands)
+4. [How to invite speedrunb0t to your channel](#how-to-invite-speedrunb0t-to-your-channel)
+5. [Guidelines for use](#guidelines-for-use)
+
+## Currently supported games
+*If you'd like me to add support for another game, just message me on Discord (Dechrissen#7708)*
 - Banjo-Kazooie
 - Banjo-Tooie
 - Donkey Kong 64
@@ -12,18 +19,13 @@ An always-online bot for Twitch.tv with speedrunner-specific functionality and S
 - Donkey Kong Country 2: Diddy's Kong Quest
 - Donkey Kong Country 3: Dixie Kong's Double Trouble!
 
-## Index
-1. [What can speedrunb0t do?](#what-can-speedrunb0t-do)
-2. [Bot commands](#bot-commands)
-3. [How to invite speedrunb0t to your channel](#how-to-invite-speedrunb0t-to-your-channel)
-4. [Guidelines for use](#guidelines-for-use)
-
 ## What can speedrunb0t do?
 - Retrieve the world record for the current game & category
 - Retrieve your personal best time for the current game & category
 - Retrieve the personal best time of a Speedrun.com user for the current game & category
 - Retrieve the leaderboard standing of a user for the current game & category
 - Retrieve a list of a user's PBs for the current game
+- Retrieve the rules for the current category from Speedrun.com
 - Generate a Speedrun.com link to the leaderboard for the current category
 - Generate a kadgar.net race link with you and other speedrunners' Twitch channels 
 
