@@ -274,7 +274,7 @@ def worldRecord(input):
             else:
                 wr = str(seconds) + " sec "
 
-            sendMessage(s, CHANNEL, "The " + category_title + " world record is " + wr + "by " + runner + ".")
+            sendMessage(s, CHANNEL, "The world record for " + category_title + " is " + wr + "by " + runner + ".")
             cooldown()
             return
 
