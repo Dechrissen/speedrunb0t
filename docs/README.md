@@ -30,8 +30,9 @@ An always-online bot for Twitch.tv with speedrunner-specific functionality and S
 - Generate a kadgar.net race link with you and other speedrunners' Twitch channels 
 
 ## Bot commands
-*Square brackets around variables indicate optionality. Angled brackets indicate required variables.*  
-*For commands with an optional [user] variable, the user defaults to the channel owner.*
+*Square brackets around variables indicate optionality. Angle brackets indicate required variables.*  
+*For commands with an optional [user] variable, the user defaults to the channel owner.*  
+*For commands with an optional [category] variable, the category defaults to the category in stream title.*
 - `!wr [category]`
     - Returns the world record (time and runner) for the current game & category.
 - `!2nd [category]`
