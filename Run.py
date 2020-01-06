@@ -256,7 +256,7 @@ def worldRecord(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -347,7 +347,7 @@ def second(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=2&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -438,7 +438,7 @@ def third(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=3&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -529,7 +529,7 @@ def fourth(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=4&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -620,7 +620,7 @@ def fifth(input):
             try:
                 response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=5&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
             except urllib.error.HTTPError as err:
-                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game.")
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
                 cooldown()
                 return
             readable = response.read().decode('utf-8')
@@ -721,7 +721,7 @@ def personalBest(input):
 
         if category_title != None:
             try:
-                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(username))
+                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform,players'.format(username))
             except urllib.error.HTTPError as err:
                 sendMessage(s, CHANNEL, "Error: Speedrun.com user not found")
                 cooldown()
@@ -729,6 +729,13 @@ def personalBest(input):
 
             readable = response.read().decode('utf-8')
             lst = loads(readable)
+
+            try:
+                username = lst['data'][0]['players']['data'][0]['names']['international']
+            except IndexError as err:
+                sendMessage(s, CHANNEL, "Error: User " + username + " has no submitted runs")
+                cooldown()
+                return
 
             place = None
             time_in_sec = None
@@ -837,7 +844,7 @@ def lastPB(input):
 
         if category_title != None:
             try:
-                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(username))
+                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform,players'.format(username))
             except urllib.error.HTTPError as err:
                 sendMessage(s, CHANNEL, "Error: Speedrun.com user not found")
                 cooldown()
@@ -845,6 +852,13 @@ def lastPB(input):
 
             readable = response.read().decode('utf-8')
             lst = loads(readable)
+
+            try:
+                username = lst['data'][0]['players']['data'][0]['names']['international']
+            except IndexError as err:
+                sendMessage(s, CHANNEL, "Error: User " + username + " has no submitted runs")
+                cooldown()
+                return
 
             place = None
             time_in_sec = None
@@ -910,7 +924,7 @@ def runs(input):
 
 
         try:
-            response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=game,platform,category&game={}'.format(username, game))
+            response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=game,platform,category,players&game={}'.format(username, game))
         except urllib.error.HTTPError as err:
             sendMessage(s, CHANNEL, "Error: Speedrun.com user not found")
             cooldown()
@@ -919,6 +933,11 @@ def runs(input):
         readable = response.read().decode('utf-8')
         lst = loads(readable)
 
+        try:
+            username = lst['data'][0]['players']['data'][0]['names']['international']
+        except IndexError as err:
+            pass
+
         ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
         place = None
         time_in_sec = None
@@ -926,7 +945,7 @@ def runs(input):
         if lst['data'] != []:
             pass
         else:
-            sendMessage(s, CHANNEL, username + " has no submitted runs for the current game.")
+            sendMessage(s, CHANNEL, "User " + username + " has no submitted runs for the current game.")
             cooldown()
             return
         for run in lst['data']:
@@ -1037,7 +1056,7 @@ def place(input):
 
         if category_title != None:
             try:
-                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(username))
+                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform,players'.format(username))
             except urllib.error.HTTPError as err:
                 sendMessage(s, CHANNEL, "Error: Speedrun.com user not found")
                 cooldown()
@@ -1045,6 +1064,13 @@ def place(input):
 
             readable = response.read().decode('utf-8')
             lst = loads(readable)
+
+            try:
+                username = lst['data'][0]['players']['data'][0]['names']['international']
+            except IndexError as err:
+                sendMessage(s, CHANNEL, "Error: User " + username + " has no submitted runs")
+                cooldown()
+                return
 
             place = None
             time_in_sec = None
