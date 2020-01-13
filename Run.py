@@ -1193,7 +1193,16 @@ def listRules(input):
                         rule = rule.strip('-')
                     list_of_rules = ' '.join(rules)
 
-            sendMessage(s, CHANNEL, game_title + " " + category_title + " rules: " + list_of_rules)
+            if len(list_of_rules) < 475:
+                sendMessage(s, CHANNEL, game_title + " " + category_title + " rules: " + list_of_rules)
+            elif len(list_of_rules) < 1000:
+                list_of_rules1 = list_of_rules[0:475]
+                list_of_rules2 = list_of_rules[475:]
+                sendMessage(s, CHANNEL, game_title + " " + category_title + " rules: " + list_of_rules1)
+                sendMessage(s, CHANNEL, list_of_rules2)
+            else:
+                sendMessage(s, CHANNEL, "Whoops! This games's list of rules is too long.")
+
             cooldown()
             return
 
