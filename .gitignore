@@ -1,4 +1,4 @@
 channels.txt
 Settings.py
 __pycache__
-log.txt
+log/
