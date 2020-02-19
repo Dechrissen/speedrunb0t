@@ -26,8 +26,8 @@ An always-online bot for Twitch.tv with speedrunner-specific functionality and S
 - Retrieve the leaderboard standing of a user for the current game & category
 - Retrieve a list of a user's PBs for the current game
 - Retrieve the rules for the current category from Speedrun.com
-- Generate a [Speedrun.com](https://www.speedrun.com/) link to the leaderboard for the current category
-- Generate a [Kadgar.net](http://kadgar.net) race link with you and other speedrunners' Twitch channels 
+- Generate a Speedrun.com link to the leaderboard for the current category
+- Generate a Kadgar.net race link with you and other speedrunners' Twitch channels 
 
 ## Bot commands
 *Square brackets around variables indicate optionality. Angle brackets indicate required variables.*  
