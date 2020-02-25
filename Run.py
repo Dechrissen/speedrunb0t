@@ -1254,12 +1254,41 @@ def raceCommand(input):
         sendMessage(s, CHANNEL, "Race link: http://kadgar.net/live/" + CHANNEL + "/" + "/".join(contenders))
         cooldown()
 
+#Retrieves the Guide page for the current game from Speedrun.com
+def guides(input):
+    if input == message.strip().lower():
+        #get user ID of current channel
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #get title of current channel
+        title = getStreamTitle(USER_ID)
+        game, platform, platform_title = getGame(USER_ID)
+        game_title = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][1] == game:
+                game_title = GAMES[i][0]
+                break
+
+        if game == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+        elif game != None:
+            sendMessage(s, CHANNEL, game_title + " speedrunning guides: https://www.speedrun.com/{}/guides".format(game))
+            cooldown()
 
 
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !help')
+        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !guides • !help')
         cooldown()
 
 #Documentation
@@ -1362,6 +1391,7 @@ while True:
         place('!place')
         leaderboard('!leaderboard')
         listRules('!rules')
+        guides('!guides')
         listGames('!games')
         raceCommand('!race')
         setSRCName('!setsrcname')

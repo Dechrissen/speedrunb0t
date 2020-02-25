@@ -1,5 +1,5 @@
 # speedrunb0t
-An always-online bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration.
+A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration.
 
 ## Index
 1. [Currently supported games](#currently-supported-games)
@@ -27,7 +27,7 @@ An always-online bot for Twitch.tv with speedrunner-specific functionality and S
 - Retrieve a list of a user's PBs for the current game
 - Retrieve the rules for the current category from Speedrun.com
 - Generate a Speedrun.com link to the leaderboard for the current category
-- Generate a Kadgar.net race link with you and other speedrunners' Twitch channels 
+- Generate a Kadgar.net race link with you and other speedrunners' Twitch channels
 
 ## Bot commands
 *Square brackets around variables indicate optionality. Angle brackets indicate required variables.*  
@@ -59,6 +59,8 @@ An always-online bot for Twitch.tv with speedrunner-specific functionality and S
     - Generates a [Kadgar.net](http://kadgar.net) link with you and your opponents' streams (if you are currently racing).
 - `!games`
     - Returns a list of speedrunb0t's currently supported games.
+- `!guides`
+    - Generates a [Speedrun.com](https://www.speedrun.com/) link to the 'Guides' page for the current game.
 - `!help`
     - Provides a link to speedrunb0t's GitHub site/documentation.
 - `!commands`
