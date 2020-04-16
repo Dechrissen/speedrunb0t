@@ -3,6 +3,7 @@ import re
 import time
 import math
 import urllib.request
+from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from json import loads
 from Socket import openSocket, sendMessage
@@ -1288,7 +1289,7 @@ def guides(input):
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !guides • !help')
+        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !guides • !srdiscord • !help')
         cooldown()
 
 #Documentation
@@ -1296,6 +1297,46 @@ def docs(input):
     if input == message.lower().strip():
         sendMessage(s, CHANNEL, "speedrunb0t's documentation can be found here: https://dechrissen.github.io/speedrunb0t")
         cooldown()
+
+#Speedrun.com Discord link
+def srDiscord(input):
+    if input == message.lower().strip():
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #Get game info
+        game, platform, platform_title = getGame(USER_ID)
+        game_title = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][1] == game:
+                game_title = GAMES[i][0]
+                break
+
+        try:
+            response = urlopen('https://www.speedrun.com/{}'.format(game)).read()
+        except urllib.error.HTTPError as err:
+            sendMessage(s, CHANNEL, "Error")
+            cooldown()
+            return
+
+        page = BeautifulSoup(response, 'html.parser')
+        d = None
+        for link in page.find_all('a','nav-link'):
+            if 'discord.gg' in link.get('href'):
+                d = str(link.get('href'))
+                break
+
+        if d:
+            sendMessage(s, CHANNEL, game_title + " Speedrun Discord: " + d)
+            cooldown()
+        else:
+            sendMessage(s, CHANNEL, "No Discord server found for " + game_title + ".")
+            cooldown()
 
 
 #Global cooldown
@@ -1392,6 +1433,7 @@ while True:
         leaderboard('!leaderboard')
         listRules('!rules')
         guides('!guides')
+        srDiscord('!srdiscord')
         listGames('!games')
         raceCommand('!race')
         setSRCName('!setsrcname')
