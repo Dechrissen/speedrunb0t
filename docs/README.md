@@ -61,6 +61,8 @@ A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API
     - Returns a list of speedrunb0t's currently supported games.
 - `!guides`
     - Generates a [Speedrun.com](https://www.speedrun.com/) link to the 'Guides' page for the current game.
+- `!srdiscord`
+    - Returns the link to the speedrunning Discord server for the current game, if one exists.
 - `!help`
     - Provides a link to speedrunb0t's GitHub site/documentation.
 - `!commands`
