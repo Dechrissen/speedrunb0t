@@ -1,5 +1,5 @@
 # speedrunb0t
-A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration.
+A Twitch.tv bot for speedrunners with Speedrun.com API integration.
 
 ## Index
 1. [Currently supported games](#currently-supported-games)
