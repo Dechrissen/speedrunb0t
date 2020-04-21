@@ -10,6 +10,7 @@
 - [x] `!srdiscord` command: Returns the speedrun Discord server link for the current game, if one exists
 - [x] `!guides` command: Returns a link to the Speedrun.com guides for the current game
 - [ ] `!video` command: Returns a link to the video for a given run
+- [ ] `!disable` and `!enable` commands that temporarily disable and re-renable speedrunb0t in a user's channel
 
 ## Possible To-Do
 
