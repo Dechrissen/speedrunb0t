@@ -12,6 +12,7 @@ A Twitch.tv bot for speedrunners with Speedrun.com API integration.
 *If you'd like me to add support for another game, just message me on Discord (Dechrissen#7708)*
 - Banjo-Kazooie
 - Banjo-Tooie
+- Banjo-Kazooie: Grunty's Revenge
 - Donkey Kong 64
 - Super Mario 64
 - Diddy Kong Racing
