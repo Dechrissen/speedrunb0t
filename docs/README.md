@@ -76,7 +76,6 @@ In order to have speedrunb0t join your channel, go to my Twitch channel [here](h
 
 ## Guidelines for use
 *Follow these guidelines for speedrunb0t to function properly in your channel.*
-- It is recommended that you make speedrunb0t a Moderator in your channel so that it doesn't get accidentally timed out/banned.
 - Make sure the game you're running is set via Twitch's 'Game' feature in your Live Dashboard.
 - Make sure the name of the category you're running is in your stream title exactly as it's listed on Speedrun.com.
 - If the platform on which you're playing the game is *different* from the default platform on the Speedrun.com leaderboard, you must put "[*platform name*]" in your title where *platform name* is the name of the platform you're using.
@@ -84,3 +83,4 @@ In order to have speedrunb0t join your channel, go to my Twitch channel [here](h
 - If you're running on emulator, make sure "emulator" is somewhere in your stream title.
 - For the `!race` command to work properly, make sure "race with" is somewhere in your stream title, directly followed by the Twitch usernames of your opponents, separated by commas.
     - *e.g.* "Banjo-Tooie Any% race with streamerdude11, twitchboy101, awesomeguy55"
+- It is recommended that you make speedrunb0t a Moderator in your channel so that it doesn't get accidentally timed out/banned.
