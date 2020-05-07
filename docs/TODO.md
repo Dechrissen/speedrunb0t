@@ -1,6 +1,6 @@
 # To-Do List
 
-- [ ] `!1st`, `!2nd`, `!3rd` --> `!nth`
+- [x] `!1st`, `!2nd`, `!3rd` --> `!nth`
 - [ ] Add a cache system for certain heavily-used commands (like `!wr`) for faster retrieval
 - [ ] Append run video links to `!wr`, `!pb`, etc.
 - [ ] Update error messages to be more consistent in wording
@@ -25,4 +25,3 @@
 - [ ] Change speedrunb0t Twitch account username color with Turbo/Prime
 - [ ] Create logo
 - [ ] Get the Twitch-wide FFZ bot icon for speedrunb0t
-
