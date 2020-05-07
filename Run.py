@@ -1387,7 +1387,7 @@ def guides(input):
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, CHANNEL, '/me commands: !wr • !2nd • !3rd • !4th • !5th • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !guides • !srdiscord • !help')
+        sendMessage(s, CHANNEL, '/me commands: !wr • !nth • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !guides • !srdiscord • !help')
         cooldown()
 
 #Documentation
