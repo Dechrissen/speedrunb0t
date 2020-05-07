@@ -36,14 +36,8 @@ A Twitch.tv bot for speedrunners with Speedrun.com API integration.
 *For commands with an optional [category] variable, the category defaults to the category in stream title.*
 - `!wr [category]`
     - Returns the world record (time and runner) for the current game & category.
-- `!2nd [category]`
-    - Returns the second place time and runner for the current game & category.
-- `!3rd [category]`
-    - Returns the third place time and runner for the current game & category.
-- `!4th [category]`
-    - Returns the fourth place time and runner for the current game & category.
-- `!5th [category]`
-    - Returns the fifth place time and runner for the current game & category.
+- `!nth [category]`
+    - Returns the nth place time and runner for the current game & category, where n = place number.
 - `!pb [user] [category]`
     - Returns the personal best of a user for the current game & category.
 - `!lastpb [user] [category]`

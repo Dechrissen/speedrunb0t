@@ -1396,6 +1396,11 @@ def docs(input):
         sendMessage(s, CHANNEL, "speedrunb0t's documentation can be found here: https://dechrissen.github.io/speedrunb0t")
         cooldown()
 
+def wrongnth(input):
+    if input == message.lower().strip():
+        sendMessage(s, CHANNEL, "@" + user + " Please specify a number for the !nth command (e.g. !1st, !2nd, !3rd, etc.)")
+        cooldown()
+
 #Speedrun.com Discord link
 def srDiscord(input):
     if input == message.lower().strip():
@@ -1518,6 +1523,7 @@ while True:
 
         #Chat commands
         getCommands('!commands')
+        wrongnth('!nth')
         nth(re.search(r"^![0-9]*1st|![0-9]*2nd|![0-9]*3rd|![0-9]*[4-9,0]th\b", message))
         worldRecord('!wr')
         #worldRecord('!1st')
