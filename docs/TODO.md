@@ -19,6 +19,7 @@
 - [ ] Set up automatic emails with crash reports
 - [ ] `!pbprogression` command: Does some sort of calculation with a user's PBs in a given category over time
 - [ ] `!wrdiff` command: Calculates the difference between a user's PB and the WR
+- [ ] Challonge.com integration for tournaments (`!bracket`, `!standings`, etc.)
 
 ### Cosmetic To-Do
 - [ ] Change speedrunb0t Twitch account username color with Turbo/Prime
