@@ -191,6 +191,104 @@ def setSRCName(input):
             sendMessage(s, CHANNEL, "@" + user + " Only the channel owner may use the !setsrcname command.")
             cooldown()
 
+def nth(input):
+    # first check if re.search returned no match, and abort if so
+    if input == None:
+        return
+    else:
+        placenum = int(re.sub("[^0-9]", "", message.split()[0]))
+        #Check to see if an argument is specified
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
+        #get user ID of current channel
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #get title of current channel
+        title = getStreamTitle(USER_ID)
+        if isEmulator(title):
+            emulators = 'true'
+        else:
+            emulators = 'false'
+        game, platform, platform_title = getGame(USER_ID)
+        if '[' in title and ']' in title:
+            for i in range(len(PLATFORMS)):
+                if PLATFORMS[i][0].lower() == title.split('[')[1].split(']')[0]:
+                    platform = PLATFORMS[i][1]
+                    platform_title = PLATFORMS[i][0]
+                    break
+        category = None
+        category_title = None
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(message.split()[0], 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, CHANNEL, "Error: Invalid category specified")
+                cooldown()
+                return
+
+
+        if game == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+        if category != None:
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top={}&embed=players&platform={}&emulators={}'.format(game, category, str(placenum), platform, emulators))
+            except urllib.error.HTTPError as err:
+                print(placenum)
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
+                cooldown()
+                return
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+            runner = lst['data']['players']['data'][placenum - 1]['names']['international']
+            time_in_sec = int(lst['data']['runs'][placenum - 1]['run']['times']['realtime_t'])
+            hours = divmod(time_in_sec, 3600)
+            minutes = divmod(hours[1], 60)
+            seconds = minutes[1]
+            t = ''
+            if hours[0] > 0:
+                t = str(hours[0]) + ":" + str(minutes[0]).zfill(2)  + ":" + str(seconds).zfill(2) + " "
+            elif minutes[0] > 0:
+                t = str(minutes[0]) + ":" + str(seconds).zfill(2) + " "
+            else:
+                t = str(seconds) + " sec "
+
+            ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
+
+            sendMessage(s, CHANNEL, "The " + ordinal(placenum) + " place time for " + category_title + " is " + t + "by " + runner + ".")
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
 
 #Returns the world record for the category that's written in the stream title
 def worldRecord(input):
@@ -1420,12 +1518,13 @@ while True:
 
         #Chat commands
         getCommands('!commands')
+        nth(re.search(r"^![0-9]*1st|![0-9]*2nd|![0-9]*3rd|![0-9]*[4-9,0]th\b", message))
         worldRecord('!wr')
-        worldRecord('!1st')
-        second('!2nd')
-        third('!3rd')
-        fourth('!4th')
-        fifth('!5th')
+        #worldRecord('!1st')
+        #second('!2nd')
+        #third('!3rd')
+        #fourth('!4th')
+        #fifth('!5th')
         personalBest('!pb')
         lastPB('!lastpb')
         lastPB('!recentpb')
