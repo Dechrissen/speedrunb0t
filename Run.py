@@ -109,10 +109,7 @@ def getGame(USER_ID):
 
 def isEmulator(title):
     """Returns True if 'emulator' is written in stream title, False otherwise."""
-    if 'emulator' in title:
-        return True
-    else:
-        return False
+    return 'emulator' in title:
 
 def joinChannel(input):
     """Adds the user to the channel list and has speedrunb0t join their channel.
