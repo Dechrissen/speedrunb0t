@@ -4,7 +4,7 @@
 - [ ] Add a cache system for certain heavily-used commands (like `!wr`) for faster retrieval
 - [ ] Append run video links to `!wr`, `!pb`, etc.
 - [ ] Update error messages to be more consistent in wording
-- [ ] Clean up code and add comments and docstrings where necessary
+- [x] Clean up code and add comments and docstrings where necessary
 - [ ] `!part` command: Makes the bot leave a channel on runtime
 - [ ] `!stats` command: Display some kind of statistics based on bot usage in each channel
 - [x] `!srdiscord` command: Returns the speedrun Discord server link for the current game, if one exists
