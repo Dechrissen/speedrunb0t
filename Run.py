@@ -109,7 +109,7 @@ def getGame(USER_ID):
 
 def isEmulator(title):
     """Returns True if 'emulator' is written in stream title, False otherwise."""
-    return 'emulator' in title:
+    return 'emulator' in title
 
 def joinChannel(input):
     """Adds the user to the channel list and has speedrunb0t join their channel.
@@ -346,6 +346,95 @@ def worldRecord(input):
             sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
             cooldown()
             return
+
+def wrvideo(input):
+    """Displays the link to the world record video for the current category in chat.
+
+    Parameters
+    ----------
+    input : str
+        the name of the chat command that calls this function
+    """
+    if input == message.lower().split()[0].strip():
+        #Check to see if an argument is specified first
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
+        #get user ID of current channel
+        try:
+            USER_ID = getUserID(CHANNEL)
+        except LookupError as err:
+            sendMessage(s, CHANNEL, "User not found")
+            cooldown()
+            return
+
+        #get title of current channel
+        title = getStreamTitle(USER_ID)
+        if isEmulator(title):
+            emulators = 'true'
+        else:
+            emulators = 'false'
+        game, platform, platform_title = getGame(USER_ID)
+        if '[' in title and ']' in title:
+            for i in range(len(PLATFORMS)):
+                if PLATFORMS[i][0].lower() == title.split('[')[1].split(']')[0]:
+                    platform = PLATFORMS[i][1]
+                    platform_title = PLATFORMS[i][0]
+                    break
+        category = None
+        category_title = None
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(input, 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, CHANNEL, "Error: Invalid category specified")
+                cooldown()
+                return
+
+
+        if game == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
+        if category != None:
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players&platform={}&emulators={}'.format(game, category, platform, emulators))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, CHANNEL, "Error: No category \"" + category_title + "\" for the current game")
+                cooldown()
+                return
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+            runner = lst['data']['players']['data'][0]['names']['international']
+            videolink = lst['data']['runs'][0]['run']['videos']['links'][0]['uri']
+
+            sendMessage(s, CHANNEL, category_title + " world record video by " + runner + ": " + videolink)
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, CHANNEL, "Error: No game/category info found in stream title")
+            cooldown()
+            return
+
 
 def nth(input):
     """Displays the nth place time for the current category in chat.
@@ -1149,7 +1238,7 @@ def getCommands(input):
         the name of the chat command that calls this function
     """
     if input == message.strip().lower():
-        sendMessage(s, CHANNEL, '/me commands: !wr • !nth • !pb • !lastpb • !runs • !place • !leaderboard • !rules • !race • !games • !guides • !srdiscord • !help')
+        sendMessage(s, CHANNEL, '/me commands: !wr • !nth • !pb • !lastpb • !runs • !place • !leaderboard • !wrvid • !rules • !race • !games • !guides • !srdiscord • !help')
         cooldown()
 
 def docs(input):
@@ -1296,6 +1385,7 @@ while True:
         wrongnth('!nth')
         nth(re.search(r"^![0-9]*1st|![0-9]*2nd|![0-9]*3rd|![0-9]*[4-9,0]th\b", message))
         worldRecord('!wr')
+        wrvideo('!wrvid')
         personalBest('!pb')
         lastPB('!lastpb')
         lastPB('!recentpb')

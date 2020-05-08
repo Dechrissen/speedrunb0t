@@ -48,6 +48,8 @@ A Twitch.tv bot for speedrunners with Speedrun.com API integration.
     - Returns a list of a user's PBs for the current game (all categories).
 - `!leaderboard`
     - Generates a [Speedrun.com](https://www.speedrun.com/) link to the leaderboard for the current game & category.
+- `!wrvid [category]`
+    - Returns the link to the video for the world record run for the current game & category.
 - `!rules`
     - Displays the rules for the current category (taken from Speedrun.com).
 - `!race`
