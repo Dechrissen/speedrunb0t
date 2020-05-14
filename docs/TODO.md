@@ -10,6 +10,7 @@
 - [x] `!guides` command: Returns a link to the Speedrun.com guides for the current game
 - [x] `!wrvid` command: Returns a link to the video for the world record run
 - [ ] `!disable` and `!enable` commands that temporarily disable and re-renable speedrunb0t in a user's channel
+- [ ] 'Title converter' function (within getStreamTitle) that converts stream titles to allow for category aliases
 
 ## Possible To-Do
 
