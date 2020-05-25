@@ -12,6 +12,7 @@
 - [ ] `!disable` and `!enable` commands that temporarily disable and re-renable speedrunb0t in a user's channel
 - [ ] 'Title converter' function (within getStreamTitle) that converts stream titles to allow for category aliases
 - [ ] Create an API system to return usage statistics
+- [ ] Fix `!race` command to have a more user-friendly format
 
 ## Possible To-Do
 
