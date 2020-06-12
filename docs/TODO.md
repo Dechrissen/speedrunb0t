@@ -13,6 +13,7 @@
 - [ ] 'Title converter' function (within getStreamTitle) that converts stream titles to allow for category aliases
 - [ ] Create an API system to return usage statistics
 - [ ] Fix `!race` command to have a more user-friendly format
+- [ ] If an API call takes too long (because Speedrun.com is unstable), make it so the bot tells the user that instead of acting slow
 
 ## Possible To-Do
 
