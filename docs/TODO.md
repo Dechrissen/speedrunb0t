@@ -10,7 +10,7 @@
 - [x] `!guides` command: Returns a link to the Speedrun.com guides for the current game
 - [x] `!wrvid` command: Returns a link to the video for the world record run
 - [ ] `!disable` and `!enable` commands that temporarily disable and re-renable speedrunb0t in a user's channel
-- [ ] 'Title converter' function (within getStreamTitle) that converts stream titles to allow for category aliases
+- [ ] 'Title converter' function (within getStreamTitle) that converts stream titles to allow for category aliases ('hundo', 'trotless')
 - [ ] Create an API system to return usage statistics
 - [ ] Fix `!race` command to have a more user-friendly format
 - [ ] If an API call takes too long (because Speedrun.com is unstable), make it so the bot tells the user that instead of acting slow
