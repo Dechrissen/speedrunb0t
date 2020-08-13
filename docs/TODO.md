@@ -14,6 +14,7 @@
 - [ ] Create an API system to return usage statistics
 - [ ] Fix `!race` command to have a more user-friendly format
 - [ ] If an API call takes too long (because Speedrun.com is unstable), make it so the bot tells the user that instead of acting slow
+- [ ] Fix `!srdiscord` (if current game is not in game list, it will cause bot to crash)
 
 ## Possible To-Do
 
