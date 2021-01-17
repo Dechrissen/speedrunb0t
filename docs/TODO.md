@@ -16,6 +16,7 @@
 - [ ] If an API call takes too long (because Speedrun.com is unstable), make it so the bot tells the user that instead of acting slow
 - [ ] Fix `!srdiscord` (if current game is not in game list, it will cause bot to crash)
 - [ ] Add BK Category Extensions from SRC (Glitchless, etc.)
+- [ ] Fix `!11th` not working (but `!11st` does)
 
 ## Possible To-Do
 
