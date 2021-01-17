@@ -17,6 +17,7 @@
 - [ ] Fix `!srdiscord` (if current game is not in game list, it will cause bot to crash)
 - [ ] Add BK Category Extensions from SRC (Glitchless, etc.)
 - [ ] Fix `!11th` not working (but `!11st` does)
+- [ ] test commit
 
 ## Possible To-Do
 
