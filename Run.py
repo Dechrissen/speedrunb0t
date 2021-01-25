@@ -1250,7 +1250,7 @@ def docs(input):
         the name of the chat command that calls this function
     """
     if input == message.lower().strip():
-        sendMessage(s, CHANNEL, "speedrunb0t's documentation can be found here: https://dechrissen.github.io/speedrunb0t")
+        sendMessage(s, CHANNEL, "speedrunb0t's documentation can be found here: https://github.com/Dechrissen/speedrunb0t/blob/master/README.md")
         cooldown()
 
 # Command for when a user writes '!nth' verbatim
