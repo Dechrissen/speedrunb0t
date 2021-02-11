@@ -1397,7 +1397,7 @@ while True:
         guides('!guides')
         srDiscord('!srdiscord')
         listGames('!games')
-        raceCommand('!race')
+        #raceCommand('!race')
         setSRCName('!setsrcname')
         docs('!help')
         docs('!speedrunb0t')
