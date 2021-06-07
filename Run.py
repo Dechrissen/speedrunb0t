@@ -119,7 +119,7 @@ def joinChannel(input):
     input : str
         the name of the chat command that calls this function
     """
-    if input == message.lower().strip() and CHANNEL == ADMIN:
+    if input == message.lower().strip() and (CHANNEL == IDENT or CHANNEL == ADMIN):
         global channel_list
         is_joined = False
         for chan in channel_list:
