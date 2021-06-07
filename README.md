@@ -1,5 +1,5 @@
 # speedrunb0t
-A Twitch.tv IRC bot for speedrunners with Speedrun.com API integration.
+An IRC bot for Twitch.tv for speedrunners, with Speedrun.com API integration.
 
 ## Index
 1. [Currently supported games](#currently-supported-games)
@@ -68,7 +68,7 @@ A Twitch.tv IRC bot for speedrunners with Speedrun.com API integration.
     - Changes the Speedrun.com username associated with the channel. The associated username defaults to your Twitch username.
 
 ## How to invite speedrunb0t to your channel
-In order to have speedrunb0t join your channel, go to my Twitch channel [here](https://www.twitch.tv/dechrissen) and type `$invite` in the chat. The bot will automatically join your channel. If your Speedrun.com username is *different* from your Twitch username, please use the `!setsrcname` command in your chat to change the associated username to your Speedrun.com username.
+In order to have speedrunb0t join your channel, go to its Twitch channel [here](https://www.twitch.tv/speedrunb0t) and type `$invite` in the chat. The bot will automatically join your channel. If your Speedrun.com username is *different* from your Twitch username, please use the `!setsrcname` command in *your own* chat to change the associated username to your Speedrun.com username.
 
 ## Guidelines for use
 *Follow these guidelines for speedrunb0t to function properly in your channel.*
